@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChatHistory">
+    <accountData>
+      <list>
+        <AccountData>
+          <accountId value="VXNlcjoyMDM3MTc=" />
+          <chats>
+            <list>
+              <chat>
+                <internalId value="5fd08482-dae1-4583-b9cf-da6e1c4e9a9c" />
+              </chat>
+              <chat>
+                <internalId value="64fcd048-a13b-4b2f-9cb9-041a7fdd5152" />
+              </chat>
+              <chat>
+                <internalId value="2ad9e0c5-f536-4100-af1b-127496fb19b1" />
+              </chat>
+              <chat>
+                <internalId value="2908eaf1-ff08-498f-84f5-8bdb1af59974" />
+              </chat>
+              <chat>
+                <internalId value="7e6c6022-10dd-46ca-a4b4-ec72fac8f72c" />
+              </chat>
+              <chat>
+                <internalId value="32fd0e92-4832-4747-b93b-eebbf2fb48e3" />
+                <messages>
+                  <list>
+                    <message>
+                      <speaker value="HUMAN" />
+                      <text value="Explain Code" />
+                    </message>
+                    <message>
+                      <speaker value="ASSISTANT" />
+                      <text value="&lt;html&gt;&lt;b&gt;&amp;#9888; Error performing this action&lt;/b&gt;&lt;br&gt;&lt;br&gt;Please retry sending your message. If you tried to run a command, try it again.&lt;br&gt;If the issue persists, please &lt;a href=&quot;https://github.com/sourcegraph/jetbrains/issues/new?template=bug_report.yml&amp;labels=bug&amp;projects=sourcegraph/381&amp;title=bug%3A+java.util.concurrent.CompletionException%3A+com.sourcegraph.cody.agent.CodyAgentException%3A+Failed+to+start+Cody+agent&amp;about=IntelliJ+IDEA+2024.1.4+%28Community+Edition%29%0ABuild+%23IC-241.18034.62%2C+built+on+June+20%2C+2024%0ARuntime+version%3A+17.0.11%2B1-b1207.24+amd64%0AVM%3A+OpenJDK+64-Bit+Server+VM+by+JetBrains+s.r.o.%0ALinux+6.9.10-1-manjaro%0AGC%3A+G1+Young+Generation%2C+G1+Old+Generation%0AMemory%3A+2048M%0ACores%3A+8%0ARegistry%3A%0A++ide.experimental.ui%3Dtrue%0ANon-Bundled+Plugins%3A%0A++com.github.catppuccin.jetbrains+%283.3.1%29%0A++izhangzhihao.rainbow.brackets+%282024.2.6-241%29%0A++com.sourcegraph.jetbrains+%286.0.16%29%0AKotlin%3A+241.18034.62-IJ%0ACurrent+Desktop%3A+Hyprland%0A&amp;logs=Stacktrace%3A%0A%60%60%60text%0Ajava.util.concurrent.CompletionException%3A+com.sourcegraph.cody.agent.CodyAgentException%3A+Failed+to+start+Cody+agent%0A%09at+java.base%2Fjava.util.concurrent.CompletableFuture.reportJoin%28CompletableFuture.java%3A413%29%0A%09at+java.base%2Fjava.util.concurrent.CompletableFuture.getNow%28CompletableFuture.java%3A2134%29%0A%09at+com.sourcegraph.cody.agent.CodyAgentService%24Companion.withAgent%24lambda%242%28CodyAgentService.kt%3A270%29%0A%09at+com.intellij.openapi.application.impl.RwLockHolder%24executeOnPooledThread%241.run%28RwLockHolder.kt%3A154%29%0A%09at+java.base%2Fjava.util.concurrent.Executors%24RunnableAdapter.call%28Executors.java%3A539%29%0A%09at+com.intellij.util.concurrency.ContextCallable.call%28ContextCallable.java%3A32%29%0A%09at+java.base%2Fjava.util.concurrent.FutureTask.run%28FutureTask.java%3A264%29%0A%09at+com.intellij.util.concurrency.ContextRunnable.run%28ContextRunnable.java%3A27%29%0A%09at+java.base%2Fjava.util.concurrent.ThreadPoolExecutor.runWorker%28ThreadPoolExecutor.java%3A1136%29%0A%09at+java.base%2Fjava.util.concurrent.ThreadPoolExecutor%24Worker.run%28ThreadPoolExecutor.java%3A635%29%0A%09at+java.base%2Fjava.util.concurrent.Executors%24PrivilegedThreadFactory%241%241.run%28Executors.java%3A702%29%0A%09at+java.base%2Fjava.util.concurrent.Executors%24PrivilegedThreadFactory%241%241.run%28Executors.java%3A699%29%0A%09at+java.base%2Fjava.security.AccessController.doPrivileged%28AccessController.java%3A399%29%0A%09at+java.base%2Fjava.util.concurrent.Executors%24PrivilegedThreadFactory%241.run%28Executors.java%3A699%29%0A%09at+java.base%2Fjava.lang.Thread.run%28Thread.java%3A840%29%0ACaused+by%3A+com.sourcegraph.cody.agent.CodyAgentException%3A+Failed+to+start+Cody+agent%0ACaused+by%3A+java.util.concurrent.CompletionException%3A+org.eclipse.lsp4j.jsonrpc.ResponseErrorException%3A+chatID+is+undefined%0A%0AError%3A+chatID+is+undefined%0A++++at+Agent.createChatPanel+%28%2Fhome%2Fjade%2F.local%2Fshare%2FJetBrains%2FIdeaIC2024.1%2FSourcegraph%2Fagent%2Findex.js%3A138116%3A17%29%0A++++at+async+%2Fhome%2Fjade%2F.local%2Fshare%2FJetBrains%2FIdeaIC2024.1%2FSourcegraph%2Fagent%2Findex.js%3A136782%3A44%0A%09at+java.base%2Fjava.util.concurrent.CompletableFuture.reportJoin%28CompletableFuture.java%3A413%29%0A%09at+java.base%2Fjava.util.concurrent.CompletableFuture.getNow%28CompletableFuture.java%3A2134%29%0A%09at+com.sourcegraph.cody.chat.AgentChatSession.getConnectionId%28AgentChatSession.kt%3A68%29%0A%09at+com.sourcegraph.cody.chat.AgentChatSessionService.restoreAllSessions%28AgentChatSessionService.kt%3A40%29%0A%09at+com.sourcegraph.cody.agent.CodyAgentService%242.invoke%28CodyAgentService.kt%3A156%29%0A%09at+com.sourcegraph.cody.agent.CodyAgentService%242.invoke%28CodyAgentService.kt%3A56%29%0A%09at+com.sourcegraph.cody.agent.CodyAgentService.startAgent%24lambda%244%28CodyAgentService.kt%3A198%29%0A%09at+com.intellij.openapi.application.impl.RwLockHolder%24executeOnPooledThread%241.run%28RwLockHolder.kt%3A154%29%0A%09at+java.base%2Fjava.util.concurrent.Executors%24RunnableAdapter.call%28Executors.java%3A539%29%0A%09at+java.base%2Fjava.util.concurrent.FutureTask.run%28FutureTask.java%3A264%29%0A%09at+java.base%2Fjava.util.concurrent.ThreadPoolExecutor.runWorker%28ThreadPoolExecutor.java%3A1136%29%0A%09at+java.base%2Fjava.util.concurrent.ThreadPoolExecutor%24Worker.run%28ThreadPoolExecutor.java%3A635%29%0A%09at+java.base%2Fjava.util.concurrent.Executors%24PrivilegedThreadFactory%241%241.run%28Executors.java%3A702%29%0A%09at+java.base%2Fjava.util.concurrent.Executors%24PrivilegedThreadFactory%241%241.run%28Executors.java%3A699%29%0A%09at+java.base%2Fjava.security.AccessController.doPrivileged%28AccessController.java%3A399%29%0A%09at+java.base%2Fjava.util.concurrent.Executors%24PrivilegedThreadFactory%241.run%28Executors.java%3A699%29%0A%09at+java.base%2Fjava.lang.Thread.run%28Thread.java%3A840%29%0ACaused+by%3A+org.eclipse.lsp4j.jsonrpc.ResponseErrorException%3A+chatID+is+undefined%0A%0AError%3A+chatID+is+undefined%0A++++at+Agent.createChatPanel+%28%2Fhome%2Fjade%2F.local%2Fshare%2FJetBrains%2FIdeaIC2024.1%2FSourcegraph%2Fagent%2Findex.js%3A138116%3A17%29%0A++++at+async+%2Fhome%2Fjade%2F.local%2Fshare%2FJetBrains%2FIdeaIC2024.1%2FSourcegraph%2Fagent%2Findex.js%3A136782%3A44%0A%09at+org.eclipse.lsp4j.jsonrpc.RemoteEndpoint.handleResponse%28RemoteEndpoint.java%3A220%29%0A%09at+org.eclipse.lsp4j.jsonrpc.RemoteEndpoint.consume%28RemoteEndpoint.java%3A204%29%0A%09at+org.eclipse.lsp4j.jsonrpc.json.StreamMessageProducer.handleMessage%28StreamMessageProducer.java%3A185%29%0A%09at+org.eclipse.lsp4j.jsonrpc.json.StreamMessageProducer.listen%28StreamMessageProducer.java%3A97%29%0A%09at+org.eclipse.lsp4j.jsonrpc.json.ConcurrentMessageProcessor.run%28ConcurrentMessageProcessor.java%3A114%29%0A%09at+java.base%2Fjava.util.concurrent.Executors%24RunnableAdapter.call%28Executors.java%3A539%29%0A%09at+java.base%2Fjava.util.concurrent.FutureTask.run%28FutureTask.java%3A264%29%0A%09at+java.base%2Fjava.util.concurrent.ThreadPoolExecutor.runWorker%28ThreadPoolExecutor.java%3A1136%29%0A%09at+java.base%2Fjava.util.concurrent.ThreadPoolExecutor%24Worker.run%28ThreadPoolExecutor.java%3A635%29%0A%09...+1+more%0A%0A%60%60%60%0AAdditional+info%3A+%60%60%60Failed+to+start+Cody+agent%60%60%60&quot;&gt;create a support ticket&lt;/a&gt;.&lt;br&gt;&lt;br&gt;&lt;sub&gt;Error: Failed to start Cody agent&lt;/sub&gt;&lt;/html&gt;" />
+                    </message>
+                  </list>
+                </messages>
+                <updatedAt value="2024-08-07T13:49:34.870625981" />
+              </chat>
+              <chat>
+                <internalId value="69fddcfb-f06f-44be-bb1e-7701efd61de8" />
+              </chat>
+              <chat>
+                <internalId value="ceae51d3-51f7-4602-be1c-cdcb20fa0b69" />
+              </chat>
+            </list>
+          </chats>
+        </AccountData>
+      </list>
+    </accountData>
+  </component>
+</project>
