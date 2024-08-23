@@ -1,8 +1,26 @@
-package HTTP.Request;
+package main.HTTP.Request;
 
 import java.util.Map;
 
+/**
+ * The RequestDTO class represents an HTTP request.
+ */
 public class RequestDTO {
+    public String getMethod() {
+        return method;
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    public Map<String, String> getHeaders() {
+        return headers;
+    }
+
+    public String getBody() {
+        return body;
+    }
 
     private String method;
     private String path;

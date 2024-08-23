@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true">
+        <processorPath useClasspath="false" useProcessorModulePath="true">
+          <entry name="$PROJECT_DIR$/src/Html/Page/PageProcessor/PageProcessor.java" />
+        </processorPath>
+      </profile>
+      <profile name="PageProcessor" enabled="true" />
+    </annotationProcessing>
+  </component>
+</project>

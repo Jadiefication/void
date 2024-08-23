@@ -1,6 +1,6 @@
-package HTTP.Parser;
+package main.HTTP.Parser;
 
-import HTTP.Request.RequestDTO;
+import main.HTTP.Request.RequestDTO;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -9,7 +9,18 @@ import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * The HTTPRequestParser class is responsible for parsing HTTP requests.
+ */
 public class HTTPRequestParser {
+
+    /**
+     * Parses an HTTP request from the given input stream.
+     *
+     * @param inputStream The input stream containing the HTTP request.
+     * @return A RequestDTO object representing the parsed HTTP request.
+     * @throws IOException If an I/O error occurs while reading the input stream.
+     */
     public static RequestDTO parse(InputStream inputStream) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
         String line = reader.readLine();
