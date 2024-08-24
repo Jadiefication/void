@@ -43,7 +43,7 @@ public class ClientHandler implements Runnable {
                 handler.accept(request, response);
             } else {
                 response.setStatusCode(404);
-                response.setBody("Not Found you idiot");
+                response.setBody("Not Found");
                 response.setHeaders(Map.of("Content-Type", "text/html"));
             }
 

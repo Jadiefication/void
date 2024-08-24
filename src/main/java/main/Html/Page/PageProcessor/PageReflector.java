@@ -27,30 +27,49 @@ public class PageReflector {
      * @param packageName The name of the package to scan for annotated classes.
      */
     public static void processClasses(String packageName) {
-        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+        ClassLoader classLoader = ClassLoader.getSystemClassLoader();
         String path = packageName.replace('.', '/');
         try {
             Enumeration<URL> resources = classLoader.getResources(path);
             while (resources.hasMoreElements()) {
                 URL resource = resources.nextElement();
                 file = new File(resource.getFile());
-                System.out.println(STR."Processing directory: \{file.getAbsolutePath()}");
-                for (File classFile : Objects.requireNonNull(file.listFiles())) {
-                    String className = STR."\{packageName}.\{classFile.getName().replace(".class", "")}";
-                    try {
-                        Class<?> clazz = Class.forName(className);
-                        if (clazz.isAnnotationPresent(Page.class)) {
-                            processPageAnnotation(clazz);
-                        }
-                    } catch (ClassNotFoundException _) {
-                    }
+                for (File directory : Objects.requireNonNull(file.listFiles())) {
+                    processDirectories(directory, packageName).start();
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new IllegalArgumentException("Check if you set your package name correctly.");
         }
     }
 
+    private static Thread processDirectories(File directory, String packageName) {
+        return new Thread(() -> {
+            if (directory.isDirectory()) {
+                for (File classFile : Objects.requireNonNull(directory.listFiles())) {
+                    processFiles(directory, packageName, classFile).start();
+                }
+            }
+        });
+    }
+
+
+    private static Thread processFiles(File directory, String packageName, File classFile) {
+        return new Thread(() -> {
+            if (classFile.getName().endsWith(".class")) {
+                String className = STR."\{packageName}.\{classFile.getName().replace(".class", "")}.\{classFile.getName().replace(".class", "")}";
+                System.out.println(STR."Processing directory: \{directory.getAbsolutePath()}, file: \{classFile.getName()}, class: \{className}");
+                try {
+                    Class<?> clazz = Class.forName(className);
+                    if (clazz.isAnnotationPresent(Page.class)) {
+                        processPageAnnotation(clazz, classFile.getName().replace(".class", ""));
+                    }
+                } catch (ClassNotFoundException e) {
+                    throw new IllegalArgumentException(STR."Class not found: \{className}, check if your package name is the same as the class name.");
+                }
+            }
+        });
+    }
     /**
      * Processes a single class annotated with @Page.
      * Extracts annotation data and sets up the corresponding server page.
@@ -58,8 +77,9 @@ public class PageReflector {
      * @param clazz The Class object representing the annotated class.
      * @throws IllegalArgumentException If there's an error reading the HTML file.
      */
-    private static void processPageAnnotation(Class<?> clazz) {
+    private static void processPageAnnotation(Class<?> clazz, String className) {
         try {
+
             Page pageAnnotation = clazz.getAnnotation(Page.class);
             String path = pageAnnotation.path();
             String method = pageAnnotation.method();
@@ -76,12 +96,12 @@ public class PageReflector {
             if (Objects.equals(annotationHTML, "not_found.html")) {
                 html = Files.readString(Path.of(notFoundPath));
             }  else {
-                html = Files.readString(new File(STR."\{file}\\\{pageAnnotation.html()}").toPath());
+                html = Files.readString(new File(STR."\{file}\\\{className}\\\{pageAnnotation.html()}").toPath());
             }
 
             Map<String, String> headerMap = parseHeaders(headers);
 
-            Server.MakePage(pageAnnotation.method(), pageAnnotation.path(), html, headerMap);
+            Server.MakePage(method, path, html, headerMap);
         }  catch (Exception e) {
             throw new IllegalArgumentException(STR."Failed to read HTML file: \{e.getMessage()}");
         }

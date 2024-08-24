@@ -14,6 +14,11 @@ import java.util.Map;
  */
 public class HTTPRequestParser {
 
+    private static String[] requestLine;
+    private static Map<String, String> headers = new HashMap<>();
+    private static String method;
+    private static String path;
+
     /**
      * Parses an HTTP request from the given input stream.
      *
@@ -24,15 +29,17 @@ public class HTTPRequestParser {
     public static RequestDTO parse(InputStream inputStream) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
         String line = reader.readLine();
-        String[] requestLine = line.split(" ");
+        try {
+            requestLine = line.split(" ");
+            method = requestLine[0];
+            path = requestLine[1];
 
-        String method = requestLine[0];
-        String path = requestLine[1];
+            while (!(line = reader.readLine()).isEmpty()) {
+                String[] header = line.split(": ");
+                headers.put(header[0], header[1]);
+            }
 
-        Map<String, String> headers = new HashMap<>();
-        while (!(line = reader.readLine()).isEmpty()) {
-            String[] header = line.split(": ");
-            headers.put(header[0], header[1]);
+        } catch (Exception _) {
         }
 
         StringBuilder body = new StringBuilder();

@@ -1,6 +1,5 @@
 package main.java.main.Server;
 import main.java.main.ClientHandler.ClientHandler;
-import main.java.main.Html.Metadata.MetadataProcessor.MetadataReflector;
 import main.java.main.Html.Page.PageProcessor.PageReflector;
 import main.java.main.Routing.Router.Router;
 
@@ -25,7 +24,6 @@ public class Server {
      */
     public static void MakeServer(int port, String packageName) {
         pageThread(packageName).start();
-        metadataThread(packageName).start();
         try(ServerSocket server = new ServerSocket(port)) {
             while(true) {
                 try {
@@ -46,12 +44,6 @@ public class Server {
     private static Thread pageThread(String packageName) {
         return new Thread(() -> {
             PageReflector.processClasses(packageName);
-        });
-    }
-
-    private static Thread metadataThread(String packageName) {
-        return new Thread(() -> {
-            MetadataReflector.processClasses(packageName);
         });
     }
 

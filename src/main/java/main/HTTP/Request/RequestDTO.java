@@ -1,6 +1,7 @@
 package main.java.main.HTTP.Request;
 
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * The RequestDTO class represents an HTTP request.
