@@ -1,0 +1,27 @@
+<!-- This is a testing template -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>${title}</title>
+</head>
+<body>
+
+<main>
+
+    <p>Here's a list of your favorite fruits:</p>
+    <ul>
+        <each items="${fruits}">
+            <li>${item}</li>
+        </each>
+        <each items="${randomStuff}">
+            <div>
+                <h1>${item}</h1>
+                <p>This is a paragraph</p>
+            </div>
+        </each>
+    </ul>
+</main>
+</body>
+</html>
