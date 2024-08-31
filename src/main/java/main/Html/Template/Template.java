@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,7 +12,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * SimpleTemplateEngine is a basic template engine that supports variable substitution
+ * SimpleTemplateEngine is a basic template engine that supports variable
+ * substitution
  * and simple looping constructs.
  */
 public class Template {
@@ -19,20 +21,17 @@ public class Template {
     // Regular expression to match variables in the format ${variableName}
     private static final Pattern VARIABLE_PATTERN = Pattern.compile("\\$\\{([^}]+)}");
 
-    // Regular expression to match <each> blocks for looping
-    private static final Pattern EACH_PATTERN = Pattern.compile("<each\\s+items=\"\\[([^}]+)]\">\\s*(.*?)\\s*</each>", Pattern.DOTALL);
-
     /**
      * Renders a template file with the given context.
      *
      * @param templatePath The path to the template file
-     * @param context A map containing variable names and their values
+     * @param context      A map containing variable names and their values
      * @return The rendered template as a string
      */
     public String render(String templatePath, Map<String, Object> context) {
         String template = readFile(templatePath);
         String result = replaceVariables(template, context);
-        result = processEachBlocks(result, context);
+        result = processEachBlocks(result);
         return result;
     }
 
@@ -60,7 +59,7 @@ public class Template {
      * Replaces variables in the template with their values from the context.
      *
      * @param template The template string
-     * @param context A map containing variable names and their values
+     * @param context  A map containing variable names and their values
      * @return The template with variables replaced
      */
     private String replaceVariables(String template, Map<String, Object> context) {
@@ -76,33 +75,31 @@ public class Template {
     }
 
     /**
-     * Processes <each> blocks in the template, repeating the content for each item in the specified list.
+     * Processes <each> blocks in the template, repeating the content for each item
+     * in the specified list.
      *
      * @param template The template string
-     * @param context A map containing variable names and their values
      * @return The template with <each> blocks processed
      */
-    private String processEachBlocks(String template, Map<String, Object> context) {
+    private String processEachBlocks(String template) {
+        Pattern EACH_PATTERN = Pattern.compile("<each\\s+items=\"\\[([^\\]]+)\\]\">(.*?)</each>", Pattern.DOTALL);
         Matcher matcher = EACH_PATTERN.matcher(template);
         StringBuffer sb = new StringBuffer();
+
         while (matcher.find()) {
             String itemsVar = matcher.group(1);
             String blockContent = matcher.group(2);
-            List<String> items = new ArrayList<>();
 
-            System.out.println("Items: " + itemsVar);
-            System.out.println("Next");
+            // Process nested each blocks recursively
+            String processedContent = processEachBlocks(blockContent);
 
-            for (String item : itemsVar.replace("[", "").replace("]", "").split(",")) {
-                items.add(item.trim());
-            }
+            List<String> items = getItemsList(itemsVar);
 
             StringBuilder replacement = new StringBuilder();
-            if (!items.isEmpty()) {
-                for (String item : items) {
-                    replacement.append(processEachBlockItems(blockContent, item));
-                }
+            for (String item : items) {
+                replacement.append(processEachBlockItems(processedContent, item));
             }
+
             matcher.appendReplacement(sb, Matcher.quoteReplacement(replacement.toString()));
         }
         matcher.appendTail(sb);
@@ -110,13 +107,16 @@ public class Template {
     }
 
     private String processEachBlockItems(String content, String itemValue) {
-        String beginning = content.substring(0, content.indexOf(">") + 1);
-        String middle = content.substring(content.indexOf(">") + 1, content.lastIndexOf("<"));
-        String ending = content.substring(content.lastIndexOf("<"));
-        if (!middle.isEmpty()) {
-            return beginning + middle.replace("$[item]", itemValue) + ending;
-        }
-        return beginning + itemValue + ending;
+        // Remove any remaining <each> tags from nested blocks
+        content = content.replaceAll("<each\\s+items=\"\\[([^\\]]+)\\]\">|</each>", "");
+        return content.replace("$[item]", itemValue);
+    }
+
+    private List<String> getItemsList(String itemsVar) {
+        // Split the comma-separated list and trim each item
+        return Arrays.stream(itemsVar.split(","))
+                .map(String::trim)
+                .toList();
     }
 
     /**
@@ -142,7 +142,9 @@ public class Template {
         context.put("randomStuff", randomStuff);
 
         // Render the template and print the result
-        String result = engine.render("C:\\Users\\Jade\\Documents\\Projects\\void\\src\\main\\java\\main\\Html\\Template\\template.html", context);
+        String result = engine.render(
+                "C:\\Users\\Jade\\Documents\\Projects\\void\\src\\main\\java\\main\\Html\\Template\\template.html",
+                context);
         System.out.println(result);
     }
 }

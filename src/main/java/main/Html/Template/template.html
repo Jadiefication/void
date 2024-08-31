@@ -13,12 +13,21 @@
     <p>Here's a list of your favorite fruits:</p>
     <ul>
         <each items="${fruits}">
-            <li>${item}</li>
+            <li>$[item]</li>
         </each>
+
         <each items="${randomStuff}">
             <div>
-                <h1>${item}</h1>
+                <h1>$[item]</h1>
                 <p>This is a paragraph</p>
+            </div>
+            <div>
+                <each items="${randomStuff}">
+                    <div>
+                        <h1>$[item]</h1>
+                        <p>This is a paragraph</p>
+                    </div>
+                </each>
             </div>
         </each>
     </ul>
