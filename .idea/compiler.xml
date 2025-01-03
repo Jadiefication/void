@@ -8,6 +8,12 @@
         </processorPath>
       </profile>
       <profile name="PageProcessor" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="your-project-name" />
+      </profile>
     </annotationProcessing>
   </component>
 </project>
